@@ -1,10 +1,5 @@
 <%- include('header'); -%>
-<script type="text/javascript" >
-  
-    // alert("Hai");            
-    var fs = require("JavaScript1.js");
-  
-  </script>
+
 <div class="container middle-section-container-1">
   <div class="middle-container-info">
     <h2>Air Conditioning Services</h2>
@@ -20,7 +15,7 @@
           <!-- <a href="/datetime" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             
           </a> -->
-          <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  onclick= <%= console.log("dsdsd") %>>
+          <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="func()">
             Order now
           </button>
           <!-- <a href="/datetime" class="btn btn-outline-dark">Order now</a> -->
@@ -34,7 +29,8 @@
           <p class="card-text">Rs.1,500</p>
           <p class="card-text">Vary after inspection</p>
           
-          <a type="button" href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick= " script.myFunction('AC-General')">Order now</a>
+          <a type="button" href="#" class="btn btn-outline-dark" data-bs-toggle="modal" 
+          onclick="'<%= script.myFunction() %>';">Order now</a>
         </div>
       </div>
     </div>
