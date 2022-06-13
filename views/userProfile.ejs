@@ -1,0 +1,36 @@
+<%- include('header'); -%>
+
+<body>
+
+  <div class="row profile-row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-header">
+          <h1>Welcome <%=info.user.firstname%> <%=info.user.lastname%>  </h1>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><h5>Email</h5><%=info.user.email%></li>
+          <li class="list-group-item"><h5>Username</h5><%=info.user.username%></li>
+          <li class="list-group-item"><h5>Address</h5><%=info.user.address%></li>
+          <li class="list-group-item"><h5>City</h5><%=info.user.city%></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Place Order</a>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+
+
+</body>
+<%- include('footer'); -%>

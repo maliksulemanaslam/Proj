@@ -1,0 +1,117 @@
+<%- include('header'); -%>
+
+<body>
+  <main>
+    <div class="container signup-container">
+      <form class="row g-3 needs-validation" novalidate action="/signup" method="post">
+        <div class="col-md-3">
+          <label for="validationCustom01" class="form-label">First name</label>
+          <input type="text" class="form-control" id="validationCustom01" required name="firstname">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom02" class="form-label">Last name</label>
+          <input type="text" class="form-control" id="validationCustom02" required name="lastname">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustomUsername" class="form-label">Username</label>
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required name="username">
+            <div class="invalid-feedback">
+              Please choose a username.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom02" class="form-label">Password</label>
+          <input type="password" class="form-control" id="validationCustom02" required name=password>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom02" class="form-label">Email</label>
+          <input type="email" class="form-control" id="validationCustom02" required name="email">
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationCustom03" class="form-label">Address</label>
+          <input type="text" class="form-control" id="validationCustom03" required name="address">
+          <div class="invalid-feedback">
+            Please provide a valid address.
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="validationCustom05" class="form-label">City</label>
+          <input type="text" class="form-control" id="validationCustom05" required name="city">
+          <div class="invalid-feedback">
+            Please provide a valid city name.
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+              Agree to terms and conditions
+            </label>
+            <div class="invalid-feedback">
+              You must agree before submitting.
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-outline-primary" type="submit">Signup</button>
+        </div>
+      </form>
+      <!-- <form action="/signup" method="POST">
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">User Name</label>
+              <input type="text" class="form-control" id="email" aria-describedby="emailHelp" name="username">
+              <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" name="firstname">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp" name="lastname">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" aria-describedby="emailHelp" name="city">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" aria-describedby="emailHelp" name="address">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="exampleInputEmail1" class="form-label">Phone no</label>
+              <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" name="phone">
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary">Signup</button>
+          </form> -->
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+
+    </div>
+  </main>
+</body>
+<%- include('footer'); -%>
