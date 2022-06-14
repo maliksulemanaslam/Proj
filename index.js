@@ -47,7 +47,8 @@ app.get("/home", (req,res) =>{
 app.get("/userprofile",isLoggedIn ,(req,res) =>{
     res.render("userprofile", { info:req });
     loggedinUser=req.user.username;
-    
+    var b=script.getVal("xyz");
+    console.log("Get valued call: "+b);
     // console.log(req);
 });
 app.get("/success",(req,res)=>{
@@ -59,39 +60,29 @@ app.get("/booking",(req,res)=>{
 app.get("/datetime",(req,res)=>{
     res.render("datetime");
 });
-app.get("/airCondition",(req,res)=>{
-    res.render("airCondition");
-    // console.log(booked);
-    // script.myFunction("abc");
-    
-    // console.log(script.booked);
+app.post("/datetime",(req,res)=>{
+    res.render("datetime");
+    console.log(req.body);
 });
-// let booked;
-// function myFunction(x) {
-// console.log("x from server called: " +x);
-// if(x==="ac-1"){
-//   booked="ac Dismounting";
-// }
-//
-// // window.alert(booked);
-// return booked;
-// }
+app.get("/airCondition",(req,res)=>{
+    
+    res.render("airCondition");
+
+});
+
 
 app.post("/airCondition", (req,res)=>{
+    
     res.render("airCondition");
-    var b=script.getVal("xyz");
-    console.log("Get valued call: "+b);
-    // console.log(req);
-  // console.log("booked from server called!" +x);
+    console.log(req.body);
+
 });
 
 //Auth Routes
 app.get("/login",(req,res)=>{
     res.render("login");
 });
-// app.post("/airCondition", function(req,res){
-//  service:
-// });
+
 app.post("/login",passport.authenticate("local",{
     successRedirect:"/userprofile",
     failureRedirect:"/login"

@@ -15,9 +15,9 @@
           <!-- <a href="/datetime" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
             
           </a> -->
-          <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="func()">
+          <a type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick= <%=script.myFunction('ac-dismounting') %>>
             Order now
-          </button>
+          </a>
           <!-- <a href="/datetime" class="btn btn-outline-dark">Order now</a> -->
         </div>
       </div>
@@ -29,8 +29,7 @@
           <p class="card-text">Rs.1,500</p>
           <p class="card-text">Vary after inspection</p>
           
-          <a type="button" href="#" class="btn btn-outline-dark" data-bs-toggle="modal" 
-          onclick="'<%= script.myFunction() %>';">Order now</a>
+          <a type="button" href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick= <%=script.myFunction('ac-general') %>>Order now</a>
         </div>
       </div>
     </div>
@@ -40,7 +39,7 @@
           <p class="card-title">AC installation</p>
           <p class="card-text">Rs.1,800</p>
           <p class="card-text">Vary after inspection</p>
-          <a href="#" class="btn btn-outline-dark">Order now</a>
+          <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Order now</a>
         </div>
       </div>
     </div>
@@ -50,7 +49,7 @@
           <p class="card-title">AC Mounting and Dismounting</p>
           <p class="card-text">Rs.2,500</p>
           <p class="card-text">Vary after inspection</p>
-          <a href="#" class="btn btn-outline-dark">Order now</a>
+          <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Order now</a>
         </div>
       </div>
     </div>
@@ -60,7 +59,7 @@
           <p class="card-title">AC Repairing</p>
           <p class="card-text">Rs.1,000</p>
           <p class="card-text">Starting from</p>
-          <a href="#" class="btn btn-outline-dark">Order now</a>
+          <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Order now</a>
         </div>
       </div>
     </div>
@@ -70,7 +69,7 @@
           <p class="card-title">Dispenser Fixing</p>
           <p class="card-text">Rs.800</p>
           <p class="card-text">Starting from</p>
-          <a href="#" class="btn btn-outline-dark">Order now</a>
+          <a href="#" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Order now</a>
         </div>
       </div>
     </div>
@@ -91,7 +90,7 @@
       </div>
       <div class="modal-body">
        
-        <form action="/airCondition" method="post">
+        <form method="post">
       <div>
           <label id="date" for="myDate">Choose your preferred service date:</label>
           <input id="myDate" type="date" name="date" required>
@@ -105,7 +104,7 @@
       </div> -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a href="home" style="text-decoration: none;" type="submit" class="btn btn-outline-dark">Place Order</a>
+        <a href="airCondition" style="text-decoration: none;" type="submit" class="btn btn-outline-dark">Place Order</a>
       </div>
       </form>
     </div>
