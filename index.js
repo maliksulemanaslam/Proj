@@ -15,7 +15,7 @@ const express               =  require('express'),
 //Connecting database
 mongoose.connect("mongodb+srv://suleman:fbxlilt247@cluster0.nz5ar.mongodb.net/adminDB?retryWrites=true&w=majority");
 
-let name, email, msg, loggedinUser, book;
+let name, email, msg, loggedinUser, book, b;
 app.use(require("express-session")({
     secret:"Any normal Word",       //decode or encode session
     resave: false,
@@ -46,10 +46,9 @@ app.get("/home", (req,res) =>{
 
 app.get("/userprofile",isLoggedIn ,(req,res) =>{
     res.render("userprofile", { info:req });
-    loggedinUser=req.user.username;
-    var b=script.getVal("xyz");
-    console.log("Get valued call: "+b);
-    // console.log(req);
+    loggedinUser=req.id;
+    
+    console.log(loggedinUser);
 });
 app.get("/success",(req,res)=>{
     res.render("success");
@@ -67,9 +66,20 @@ app.post("/datetime",(req,res)=>{
 app.get("/airCondition",(req,res)=>{
     
     res.render("airCondition");
+    b=script.getVal("xyz");
+    console.log("Get valued call: "+b);
 
 });
+app.get('/acDismounting', (req, res) => {
 
+    
+    myFunction('ac-dismounting')
+})
+app.get('/acGeneral', (req, res) => {
+
+    
+    myFunction('ac-general')
+})
 
 app.post("/airCondition", (req,res)=>{
     
@@ -81,13 +91,14 @@ app.post("/airCondition", (req,res)=>{
 //Auth Routes
 app.get("/login",(req,res)=>{
     res.render("login");
+    console.log(req);
 });
 
 app.post("/login",passport.authenticate("local",{
     successRedirect:"/userprofile",
     failureRedirect:"/login"
 }),function (req, res){
-// console.log( req);
+//  console.log(req);
 });
 
 app.get("/signup",(req,res)=>{
@@ -132,12 +143,22 @@ app.post("/signup",(req,res)=>{
     });
   });
 });
-
+function update(){
+    User.updateOne({loggedinUser}, {bookedService: b},function(err){
+       if(err){
+           console.log(err)
+       }
+       else{
+           console.log("Successfully update");
+       }
+    })   
+   }
 app.get("/logout",(req,res)=>{
     req.logout();
-    loggedinUser="";
+    update();
     res.redirect("/");
-
+    // loggedinUser="";
+    
 });
 
 function isLoggedIn(req,res,next) {
