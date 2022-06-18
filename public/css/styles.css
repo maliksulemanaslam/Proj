@@ -34,7 +34,9 @@ h3 {
   margin-left: 55px;
   cursor: text;
 }
-
+.logo-link{
+  cursor: pointer;
+}
 .dropdown-menu {
   max-height: 280px;
   overflow-y: auto;
@@ -63,9 +65,29 @@ h3 {
   border-radius: 1.2rem;
   padding-top: 3%;
   padding-bottom: 4%;
-  box-shadow: 1px 4px 7px 2px #99614d66;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-
+.air-cond-middle-section-container-1 {
+  background-color: #EFEFEF;
+  border-radius: 1.2rem;
+  padding-top: 3%;
+  padding-bottom: 4%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin-top: 50px;
+}
+.service-div{
+  padding-left: 3%;
+  background-color: #EFEFEF;
+  border-radius: 1.2rem;
+  padding-top: 3%;
+  padding-bottom: 4%;
+  margin-top: 5px;
+  visibility: hidden;
+}
+.login-warning{
+  margin: 5px;
+  color: red;
+}
 .middle-section-container-2 {
   margin-top: 8%;
   margin-bottom: 8%;
@@ -73,6 +95,9 @@ h3 {
   max-width: 80%;
   padding-top: 60px;
   padding-bottom: 60px;
+  border-radius: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .left-column {
@@ -138,7 +163,7 @@ h3 {
   background-color: #E8E8A6;
 }
 .Last-section{
-  box-shadow: 1px 4px 7px 2px #16121566;
+  margin: 150px 0px 50px;
 }
 .footer-container {
   text-align: center;
@@ -166,6 +191,35 @@ input {
   border: none;
   border-bottom: 2px solid #767474;
 }
+.pt-3{
+ 
+  margin-top: 1rem!important;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px;
+}
+.login-input{
+  border-radius: 10px;
+}
+.prof-body{
+  padding: 100px;
+}
+.prof-container{
+  max-width: 1100px;
+  /* margin-top: 100px; */
+}
+.inp{
+  
+}
+.form-control:disabled, .form-control[readonly] {
+  background-color: #ffffff;
+  opacity: 100%;
+  border: 1px solid #8e8e93;
+    border-radius: 100px;
+    height: 60px;
+    background: 0 0;
+    padding-left: 30px;
+
+}
 
 /* input[type=submit] {
 	font-family: 'Helvetica', serif;
@@ -179,14 +233,19 @@ input {
 } */
 /* Card css */
 .login-card {
+  padding: 20px;
   max-width: 40%;
   margin-top: 40px;
   margin-bottom: 30px;
   border-radius: 2rem !important;
-  box-shadow: 6px 8px 4px 1px #99614d66;
-  background-color: #EEEEEE;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-
+.card{
+  border:0;
+}
+.list-group-item{
+  border: 0;
+}
 .user-dropdown {
   min-width: 6rem;
 }
@@ -194,15 +253,19 @@ input {
 a {
   text-decoration: none;
 }
-
+.col-md-12{
+  padding: 50px 80px;
+}
 .card-header {
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 0;
   background-color: rgb(255 255 255 / 3%);
-  border-bottom: 1px solid rgba(0, 0, 0, .125);
+  border-bottom: 0px;
 }
-
+.card-body{
+  padding: 1rem 0;
+}
 .card-footer {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -214,7 +277,9 @@ a {
   justify-content: center;
   align-items: center;
 }
-
+.buttons{
+  margin: 30px 0;
+}
 /* Card css */
 .form-check-input {
   padding: 0;
@@ -237,10 +302,9 @@ a {
 .signup-container {
   margin-top: 80px;
   margin-bottom: 30px;
-  border: 1px solid;
-  border-radius: 2rem;
   padding: 30px;
-  box-shadow: 6px 8px 4px 1px #99614d66;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px;
 }
 
 .display {
@@ -271,6 +335,7 @@ a {
 }
 .icon{
   width: 82px;
+  margin-top: 15px;
 }
 /* Media Query Breakpoints */
 @media (max-width:900px) {
@@ -297,3 +362,36 @@ a {
     width: 75%;
   }
 } */
+
+@media (min-width:576px) {
+  .left-column{
+    position: relative;
+    width: 100%;
+    background: url("");
+  }
+  .right-column {
+    margin-left: 0;
+    width: 100%;
+}
+.carousel{
+  padding: 30px;
+}
+  .carousel-inner{
+    border-radius: 30px;
+  }
+  .top-section-container-fluid {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.home-h3{
+  display: inline-block;
+}
+.top-section-parapgraph{
+  display: inline-block;
+}
+.top-section-container-fluid{
+  text-align: center;
+}
+}

@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema({
     email:String,
     address: String,
     city: String,
-    bookedService: String
+    bookedService: Array,
+    previouslyBooked: Array
 });
 UserSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("User",UserSchema);

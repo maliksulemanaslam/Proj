@@ -14,6 +14,7 @@ const express               =  require('express'),
 
 //Connecting database
 mongoose.connect("mongodb+srv://suleman:fbxlilt247@cluster0.nz5ar.mongodb.net/adminDB?retryWrites=true&w=majority");
+const id = new mongoose.Types.ObjectId() //generating id for new booked service
 
 let name, email, msg, loggedinUser, book, b;
 app.use(require("express-session")({
@@ -45,10 +46,13 @@ app.get("/home", (req,res) =>{
 });
 
 app.get("/userprofile",isLoggedIn ,(req,res) =>{
-    res.render("userprofile", { info:req });
+    res.render("userprofile", { info:req,  message: '', bookedService:[], updateService: [] });
     loggedinUser=req.id;
     
     console.log(loggedinUser);
+    // console.log("the user session " + req.sessionID);
+    // console.log("user: ", req.session.passport.user);
+    // console.log("user: ", req.user._id);
 });
 app.get("/success",(req,res)=>{
     res.render("success");
@@ -65,7 +69,7 @@ app.post("/datetime",(req,res)=>{
 });
 app.get("/airCondition",(req,res)=>{
     
-    res.render("airCondition");
+    res.render("airCondition",  {message: ''});
     b=script.getVal("xyz");
     console.log("Get valued call: "+b);
 
@@ -82,16 +86,183 @@ app.get('/acGeneral', (req, res) => {
 })
 
 app.post("/airCondition", (req,res)=>{
-    
-    res.render("airCondition");
-    console.log(req.body);
+    if(req.user === undefined){
+        console.log('You need to login first')
+        return res.render("login", {message: 'You need to login first'})
+    }else{
+        const date = req.body.date;
+        const time = req.body.time;
+        const service = req.body.service;
+        const price = req.body.price;
+        console.log(service, date, price, time)
+        User.updateOne({_id: req.user._id},   { 
+            $push: { 
+                bookedService:  { service, price, date, time}
+             } 
+           }).then(result => {
+            return  res.render("airCondition", {message: 'Your order has been placed successfully'});
+           }).catch(err=>{
+            console.log(err);
+            return  res.render("airCondition", {message: 'Please try again later. Order could not be placed'});
+           
+           })
+    }
+  
 
+});
+// To Get The Previou Service
+app.get("/getPreviouslyBookedService", (req, res)=>{
+    User.findOne({ "_id": req.user._id })
+    .then(result=>{
+        if(result.previouslyBooked.length >= 1){
+           
+            return  res.render("userprofile", {info:req, message: '', bookedService: result.previouslyBooked, updateService: []});
+        }else{
+ 
+            return  res.render("userprofile", {info:req, message: 'No Previouly Booked Service', bookedService: [], updateService: []});
+        }
+
+    }).catch(err=>{
+        console.log(err);
+        return  res.render("userprofile", {info:req, message: 'Please try again later. An Error Occured', bookedService:[], updateService: []});
+    })
+});
+// To Get The Service To Be Updated
+app.get("/getOrderToUpdate", (req, res)=>{
+    User.findOne({ "_id": req.user._id })
+    .then(result=>{
+        if(result.bookedService.length >= 1){
+            return  res.render("userprofile", {info:req, message: '', updateService: result.bookedService, bookedService: []});
+        }else{
+            return  res.render("userprofile", {info:req, message: 'No Booked Service', updateService: [], bookedService: []});
+        }
+
+    }).catch(err=>{
+        console.log(err);
+        return  res.render("userprofile", {info:req, message: 'Please try again later. An Error Occured',updateService: [], bookedService:[]});
+    })
+});
+app.get("/userprofile-2", (req, res)=>{
+    return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Deleted', bookedService: [], updateService: [] })
+});
+//To Cancel Order
+app.post("/cancelOrder", (req, res)=>{
+    const remainingorder = req.query.remainingOrder;
+    const remainingArray = [];
+     var splitRemaining = remainingorder.split(",")
+    for(var i = 0; i < splitRemaining.length; i++){
+       let resplitRemaining = splitRemaining[i].split(' ');
+       remainingArray.push(resplitRemaining)
+    }
+    const finalArray = [];
+    for(var i = 0; i < remainingArray.length; i++){
+        row={
+            service: remainingArray[i][0],
+            price: remainingArray[i][1],
+            date: remainingArray[i][2],
+            time: remainingArray[i][3]
+        }
+        finalArray.push(row)
+     }
+    User.updateOne({ "_id": req.user._id, },
+        { "bookedService": finalArray }
+    ).then((result) => {
+        console.log(result)
+        return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Deleted',updateService: [], bookedService: [] })
+    }).catch(err => {
+        console.log(err)
+        return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Deleted', updateService: [], bookedService: [] })
+    })
+});
+//To Add to Previously Booked Service
+app.post("/updateOrder", (req, res)=>{
+    const updateOrder = req.query.updateOrder;
+    const remainingOrder = req.query.remainingOrder;
+    const updateArray = [];
+    const remainingArray = [];
+    if(remainingOrder.length >= 1){
+        var splitUpdate = updateOrder.split(",");
+        var remaining = remainingOrder.split(",");
+       for(var i = 0; i < splitUpdate.length; i++){
+          let resplitRemaining = splitUpdate[i].split(' ');
+          updateArray.push(resplitRemaining)
+       }
+       for(var i = 0; i < remaining.length; i++){
+           let resplitRemaining = remaining[i].split(' ');
+           remainingArray.push(resplitRemaining)
+        }
+       const finalArray = [];
+       for(var i = 0; i < updateArray.length; i++){
+           row={
+               service: updateArray[i][0],
+               price: updateArray[i][1],
+               date: updateArray[i][2],
+               time: updateArray[i][3]
+           }
+           finalArray.push(row)
+        }
+        const finalRemainingArray= []
+        for(var i = 0; i < remainingArray.length; i++){
+           row={
+               service: remainingArray[i][0],
+               price: remainingArray[i][1],
+               date: remainingArray[i][2],
+               time: remainingArray[i][3]
+           }
+           finalRemainingArray.push(row)
+        }
+    
+   
+       User.updateOne({ "_id": req.user._id, },
+        {
+           $push: { "previouslyBooked": finalArray[0] },
+            "bookedService": finalRemainingArray }
+       ).then((result) => {
+           console.log(result)
+           return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
+       }).catch(err => {
+           console.log(err)
+           return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
+       })
+    }else{
+        var splitUpdate = updateOrder.split(",");
+       for(var i = 0; i < splitUpdate.length; i++){
+          let resplitRemaining = splitUpdate[i].split(' ');
+          updateArray.push(resplitRemaining)
+       }
+     
+       const finalArray = [];
+       for(var i = 0; i < updateArray.length; i++){
+           row={
+               service: updateArray[i][0],
+               price: updateArray[i][1],
+               date: updateArray[i][2],
+               time: updateArray[i][3]
+           }
+           finalArray.push(row)
+        }
+   
+       User.updateOne({ "_id": req.user._id, },
+        {
+           $push: { "previouslyBooked": finalArray[0] },
+            "bookedService": [] 
+        
+       }
+       ).then((result) => {
+           console.log(result)
+           return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
+       }).catch(err => {
+           console.log(err)
+           return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
+       })
+    }
+ 
 });
 
 //Auth Routes
 app.get("/login",(req,res)=>{
-    res.render("login");
-    console.log(req);
+    res.render("login", {message:''});
+    // console.log(req);
 });
 
 app.post("/login",passport.authenticate("local",{
@@ -133,7 +304,7 @@ app.post("/home", function(req, res){
 
 app.post("/signup",(req,res)=>{
 
-    User.register(new User({firstname:req.body.firstname,lastname:req.body.lastname,username:req.body.username,email:req.body.email,address:req.body.address,city:req.body.city,bookedService:"No service booked"}),req.body.password,function(err,user){
+    User.register(new User({firstname:req.body.firstname,lastname:req.body.lastname,username:req.body.username,email:req.body.email,address:req.body.address,city:req.body.city,bookedService:[]}),req.body.password,function(err,user){
         if(err){
             console.log(err);
             res.render("signup");
@@ -172,7 +343,7 @@ function isLoggedIn(req,res,next) {
 //Listen On Server
 
 
-app.listen(process.env.PORT ||3000,function (err) {
+app.listen(process.env.PORT || 3000,function (err) {
     if(err){
         console.log(err);
     }else {

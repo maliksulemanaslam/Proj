@@ -2,35 +2,93 @@
 
 <body>
 
-  <div class="row profile-row">
-    <div class="col-sm-6 col-lg-3">
-      <div class="card">
-        <div class="card-header">
-          <h1>Welcome <%=info.user.firstname%> <%=info.user.lastname%>  </h1>
+  <div class="prof-body">
+    <div class="container prof-container">
+      <div class="row pt-3">
+        <div class="col-md-12">
+          <h1> <i class="fa-solid fa-user"></i> Profile</h1>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><h5>Email</h5><%=info.user.email%></li>
-          <li class="list-group-item"><h5>Username</h5><%=info.user.username%></li>
-          <li class="list-group-item"><h5>Address</h5><%=info.user.address%></li>
-          <li class="list-group-item"><h5>City</h5><%=info.user.city%></li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-sm-6 col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Place Order</a>
+          <div class="col-md-2">
+           
+          </div>
+          <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h1>Welcome </h1>
+          </div>
+          <ul class="list-group list-group-flush">
+            <input type="text" class="form-control inp" placeholder="Full name" value="<%=info.user.firstname%> <%=info.user.lastname%>" disabled>
+            <li class="list-group-item"><h5>Email</h5></li>
+            <input type="text" class="form-control inp" placeholder="Recipient's username" value="<%=info.user.email%>" disabled>
+            <li class="list-group-item"><h5>Username</h5></li>
+            <input type="text" class="form-control inp" placeholder="Recipient's username" value="<%=info.user.username%>" disabled>
+            <li class="list-group-item"><h5>Address</h5></li>
+            <input type="text" class="form-control inp" placeholder="Recipient's username" value="<%=info.user.address%>" disabled>
+            <li class="list-group-item"><h5>City</h5></li>
+            <input type="text" class="form-control inp" placeholder="Recipient's username" value="<%=info.user.city%>" disabled>
+          </ul>
         </div>
-      </div>
+        <div class="card">
+          <div class="card-body">
+            <a href="home" class="btn btn-primary">Place an Order</a>
+            <a href="/getOrderToUpdate" class="btn btn-danger">Cancel my order</a>
+            <a href="/getPreviouslyBookedService" class="btn btn-primary">View previous orders</a>
+          </div>
+        </div>
+      <%= message %>
+      <%entries = bookedService.map(function(elem) {
+            return '<div><span style="cursor: pointer;">'+'<span>Service: </span>' + elem.service + '<br><span>Price: </span> ' + elem.price + '<br><span>Date: </span> ' + elem.date + '<br><span>Time: </span> ' + elem.time + '</span><br/></div>';
+         
+    }) -%>
+    <div>
+      <p id="entries"><%- entries %></p>
     </div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/logout">Logout</a></li>
-    </ul>
+    
+    <% update = updateService.map(function(elem) {
+      return '<span style="cursor: pointer;" onclick="updateOrder()" id="' + elem.service +'">' + elem.service + ' ' + elem.price + ' ' + elem.date + ' ' + elem.time + '</span><br/>';
+  }) -%>
+  <div>
+    <p id="update"><%- update %></p>
   </div>
+  
+  <div class="buttons">
+    <a class="btn btn-outline-dark" href="/">Home</a>
+    <a class="btn btn-outline-danger"href="/logout"><i class="fa-solid fa-right-from-bracket"> </i> Logout</a>
+  </div>
+  
+  </div>
+  
+</div>
+</div>
+</div>
+<script>
+ function updateOrder() {
+    console.log(event.target.id);
+    let array = document.getElementById('update').innerText
+    console.log(array)
+    //let array = '<%= bookedService.join(", "); %>'
+    console.log(array.split(","))
+    const splitArray = array.split(",")
+    const updateOrder = splitArray.reduce((acc, num) => { return num.split(' ')[0] === event.target.id ? acc.concat(num) : acc }, []);
+    const remainingOrder = splitArray.reduce((acc, num) => { return num.split(' ')[0] !== event.target.id ? acc.concat(num) : acc }, []);
 
+    console.log(updateOrder)
+    fetch(`/updateOrder?updateOrder=${updateOrder}&remainingOrder=${remainingOrder}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      redirect: 'follow',
+    }).then(result => {
+      console.log(result);
+      if(result.ok){
+        window.location.href = '/userprofile-2'
+      }
+    }).catch(err => console.log(err))
+    // href="/cancelOrder?id=' + elem.id + '&time=' + elem.time + '&service=' + elem.service + '&date=' + elem.date + '&price=' +elem.price + '"
+  }
+
+</script>
 
 </body>
 <%- include('footer'); -%>
