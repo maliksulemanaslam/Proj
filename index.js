@@ -100,7 +100,7 @@ app.post("/airCondition", (req,res)=>{
                 bookedService:  { service, price, date, time}
              } 
            }).then(result => {
-            return  res.render("airCondition", {message: 'Your order has been placed successfully'});
+            return  res.render("orderPlaced", {message: 'Your order has been placed successfully'});
            }).catch(err=>{
             console.log(err);
             return  res.render("airCondition", {message: 'Please try again later. Order could not be placed'});
