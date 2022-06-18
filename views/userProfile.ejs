@@ -37,7 +37,7 @@
         </div>
       <%= message %>
       <%entries = bookedService.map(function(elem) {
-            return '<div><span style="cursor: pointer;">'+'<span>Service: </span>' + elem.service + '<br><span>Price: </span> ' + elem.price + '<br><span>Date: </span> ' + elem.date + '<br><span>Time: </span> ' + elem.time + '</span><br/></div>';
+            return '<span style="cursor: pointer;">'+' ' + elem.service + ' ' + elem.price + ' ' + elem.date + ' ' + elem.time + '</span><br/>';
          
     }) -%>
     <div>

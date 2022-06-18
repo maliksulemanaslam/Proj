@@ -111,6 +111,7 @@ h3 {
   flex-direction: row;
 }
 
+
 .right-column {
   padding: 0;
   margin-left: 50%;
@@ -363,7 +364,7 @@ a {
   }
 } */
 
-@media (min-width:576px) {
+@media (max-width:576px) {
   .left-column{
     position: relative;
     width: 100%;
