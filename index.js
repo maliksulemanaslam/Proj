@@ -57,6 +57,9 @@ app.get("/userProfile",isLoggedIn ,(req,res) =>{
 app.get("/success",(req,res)=>{
     res.render("success");
 });
+app.get("/orderPlaced",(req,res)=>{
+    res.render("orderPlaced", {message: ''});
+});
 app.get("/booking",(req,res)=>{
     res.render("booking");
 });
