@@ -103,7 +103,7 @@ app.post("/airCondition", (req,res)=>{
             return  res.render("orderPlaced", {message: 'Your order has been placed successfully'});
            }).catch(err=>{
             console.log(err);
-            return  res.render("airCondition", {message: 'Please try again later. Order could not be placed'});
+            return  res.render("orderPlaced", {message: 'Please try again later. Order could not be placed'});
            
            })
     }
@@ -273,7 +273,7 @@ app.post("/login",passport.authenticate("local",{
 });
 
 app.get("/signup",(req,res)=>{
-    res.render("signup");
+    res.render("signup", {message:''});
 });
 
 app.post("/home", function(req, res){
@@ -307,26 +307,16 @@ app.post("/signup",(req,res)=>{
     User.register(new User({firstname:req.body.firstname,lastname:req.body.lastname,username:req.body.username,email:req.body.email,address:req.body.address,city:req.body.city,bookedService:[]}),req.body.password,function(err,user){
         if(err){
             console.log(err);
-            res.render("signup");
+            res.render("signup", {message:'There was some error or given username already exists'});
         }
     passport.authenticate("local")(req,res,function(){
         res.redirect("/success");
     });
   });
 });
-function update(){
-    User.updateOne({loggedinUser}, {bookedService: b},function(err){
-       if(err){
-           console.log(err)
-       }
-       else{
-           console.log("Successfully update");
-       }
-    })   
-   }
+
 app.get("/logout",(req,res)=>{
     req.logout();
-    update();
     res.redirect("/");
     // loggedinUser="";
     

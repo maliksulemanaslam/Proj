@@ -1,7 +1,19 @@
 <%- include('header'); -%>
-<div class="success-container container">
-  <h1>Signed up successful!</h1>
-  <a href="/login" class="btn btn-outlinr-primary">OK</a>
-  </div>
-
-<%- include('footer'); -%>
+<body>
+  <main>
+      <div class="card-container container">
+        <div class="card text-center border-dark mb-3 login-card">
+          <div class="card-header">
+            <h4>Message</h4>
+          </div>
+          <div class="card-body">
+              <p>Signup Successful!</p>
+          </div>
+          <div class="card-footer text-muted">
+            <a class="btn btn-outline-dark" href="/userProfile">OK</a>
+          </div>
+        </div>
+  
+      </div>
+    </main>
+</body>
