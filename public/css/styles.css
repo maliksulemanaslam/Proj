@@ -177,9 +177,11 @@ h3 {
   text-align: center;
   padding-bottom: 40px;
 }
-.footer-p{
+
+.footer-p {
   margin: 0;
 }
+
 .main {
   padding: 20px;
   font-family: 'Helvetica', serif;
@@ -432,13 +434,63 @@ a {
     padding-left: 0;
     text-align: center;
   }
-  .middle-section-container-2{
+
+  .middle-section-container-2 {
     padding-top: 20px;
   }
+
   .complaint-h3 {
     width: 100%;
   }
-  .last-section-container{
+
+  .last-section-container {
     padding: 15px 20px;
+  }
+
+  .login-card {
+    max-width: 85%;
+  }
+
+  .login-h4 {
+    font-size: calc(1.775rem + .3vw);
+    text-align: center;
+  }
+
+  .card-body {
+    padding: 0.5rem 0;
+  }
+
+  #signup-main {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .signup-container {
+    border-radius: 2rem;
+  }
+
+  .prof-body {
+    padding: 35px;
+
+  }
+
+  .pt-3 {
+    border-radius: 2rem;
+  }
+
+  .col-md-12 {
+    padding: 10px 30px;
+  }
+
+  .profile-h1 {
+    font-size: calc(2.375rem + .3vw);
+  }
+
+  .prof-link {
+    margin: 7px;
+  }
+
+  .buttons {
+    margin: 30px 10px;
   }
 }
