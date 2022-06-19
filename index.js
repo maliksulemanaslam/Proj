@@ -45,8 +45,8 @@ app.get("/home", (req,res) =>{
     res.render("home" , { script:script });
 });
 
-app.get("/userprofile",isLoggedIn ,(req,res) =>{
-    res.render("userprofile", { info:req,  message: '', bookedService:[], updateService: [] });
+app.get("/userProfile",isLoggedIn ,(req,res) =>{
+    res.render("userProfile", { info:req,  message: '', bookedService:[], updateService: [] });
     loggedinUser=req.id;
     
     console.log(loggedinUser);
@@ -116,15 +116,15 @@ app.get("/getPreviouslyBookedService", (req, res)=>{
     .then(result=>{
         if(result.previouslyBooked.length >= 1){
            
-            return  res.render("userprofile", {info:req, message: '', bookedService: result.previouslyBooked, updateService: []});
+            return  res.render("userProfile", {info:req, message: '', bookedService: result.previouslyBooked, updateService: []});
         }else{
  
-            return  res.render("userprofile", {info:req, message: 'No Previouly Booked Service', bookedService: [], updateService: []});
+            return  res.render("userProfile", {info:req, message: 'No Previouly Booked Service', bookedService: [], updateService: []});
         }
 
     }).catch(err=>{
         console.log(err);
-        return  res.render("userprofile", {info:req, message: 'Please try again later. An Error Occured', bookedService:[], updateService: []});
+        return  res.render("userProfile", {info:req, message: 'Please try again later. An Error Occured', bookedService:[], updateService: []});
     })
 });
 // To Get The Service To Be Updated
@@ -132,18 +132,18 @@ app.get("/getOrderToUpdate", (req, res)=>{
     User.findOne({ "_id": req.user._id })
     .then(result=>{
         if(result.bookedService.length >= 1){
-            return  res.render("userprofile", {info:req, message: '', updateService: result.bookedService, bookedService: []});
+            return  res.render("userProfile", {info:req, message: '', updateService: result.bookedService, bookedService: []});
         }else{
-            return  res.render("userprofile", {info:req, message: 'No Booked Service', updateService: [], bookedService: []});
+            return  res.render("userProfile", {info:req, message: 'No Booked Service', updateService: [], bookedService: []});
         }
 
     }).catch(err=>{
         console.log(err);
-        return  res.render("userprofile", {info:req, message: 'Please try again later. An Error Occured',updateService: [], bookedService:[]});
+        return  res.render("userProfile", {info:req, message: 'Please try again later. An Error Occured',updateService: [], bookedService:[]});
     })
 });
 app.get("/userprofile-2", (req, res)=>{
-    return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Deleted', bookedService: [], updateService: [] })
+    return res.status(200).render('userProfile', { info: req, message: 'Service Succesfully Deleted', bookedService: [], updateService: [] })
 });
 //To Cancel Order
 app.post("/cancelOrder", (req, res)=>{
@@ -168,10 +168,10 @@ app.post("/cancelOrder", (req, res)=>{
         { "bookedService": finalArray }
     ).then((result) => {
         console.log(result)
-        return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Deleted',updateService: [], bookedService: [] })
+        return res.status(200).render('userProfile', { info: req, message: 'Service Succesfully Deleted',updateService: [], bookedService: [] })
     }).catch(err => {
         console.log(err)
-        return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Deleted', updateService: [], bookedService: [] })
+        return res.status(500).render('userProfile', { info: req, message: 'Please Try Again. Service Could Not Be Deleted', updateService: [], bookedService: [] })
     })
 });
 //To Add to Previously Booked Service
@@ -219,10 +219,10 @@ app.post("/updateOrder", (req, res)=>{
             "bookedService": finalRemainingArray }
        ).then((result) => {
            console.log(result)
-           return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
+           return res.status(200).render('userProfile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
        }).catch(err => {
            console.log(err)
-           return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
+           return res.status(500).render('userProfile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
        })
     }else{
         var splitUpdate = updateOrder.split(",");
@@ -250,10 +250,10 @@ app.post("/updateOrder", (req, res)=>{
        }
        ).then((result) => {
            console.log(result)
-           return res.status(200).render('userprofile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
+           return res.status(200).render('userProfile', { info: req, message: 'Service Succesfully Update',updateService: [], bookedService: [] })
        }).catch(err => {
            console.log(err)
-           return res.status(500).render('userprofile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
+           return res.status(500).render('userProfile', { info: req, message: 'Please Try Again. Service Could Not Be Updated', updateService: [], bookedService: [] })
        })
     }
  
@@ -266,7 +266,7 @@ app.get("/login",(req,res)=>{
 });
 
 app.post("/login",passport.authenticate("local",{
-    successRedirect:"/userprofile",
+    successRedirect:"/userProfile",
     failureRedirect:"/login"
 }),function (req, res){
 //  console.log(req);
