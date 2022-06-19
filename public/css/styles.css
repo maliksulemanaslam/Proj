@@ -449,17 +449,17 @@ a {
 
   .login-card {
     max-width: 85%;
-    font-size: calc(1.575rem + .3vw);
+    font-size: calc(1.275rem + .3vw);
   }
 .success-h4{
-  font-size: calc(1.575rem + .3vw);
+  font-size: calc(1.275rem + .3vw);
 }
 .success-btn{
-  font-size: calc(1.575rem + .3vw);
+  font-size: calc(1.275rem + .3vw);
   border-radius: 1.2rem;
 }
   .login-h4 {
-    font-size: calc(1.775rem + .3vw);
+    font-size: calc(1.475rem + .3vw);
     text-align: center;
   }
 
