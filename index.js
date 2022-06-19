@@ -34,6 +34,30 @@ app.use(bodyParser.urlencoded(
 app.use(passport.initialize());
 app.use(passport.session());
 
+function booking(req, res){
+    if(req.user === undefined){
+        console.log('You need to login first')
+        return res.render("login", {message: 'You need to login first'})
+    }else{
+        const date = req.body.date;
+        const time = req.body.time;
+        const service = req.body.service;
+        const price = req.body.price;
+        console.log(service, date, price, time)
+        User.updateOne({_id: req.user._id},   { 
+            $push: { 
+                bookedService:  { service, price, date, time}
+             } 
+           }).then(result => {
+            return  res.render("orderPlaced", {message: 'Your order has been placed successfully'});
+           }).catch(err=>{
+            console.log(err);
+            return  res.render("orderPlaced", {message: 'Please try again later. Order could not be placed'});
+           
+           })
+    }
+}
+
 //=======================
 //      R O U T E S
 //=======================
@@ -77,6 +101,27 @@ app.get("/airCondition",(req,res)=>{
     console.log("Get valued call: "+b);
 
 });
+app.get("/plumber",(req,res)=>{
+    res.render("plumber",  {message: ''});
+});
+app.post("/airCondition", (req,res)=>{
+    booking(req,res);
+});
+app.post("/plumber", (req,res)=>{
+    booking(req,res);
+});
+app.get("/electrician",(req,res)=>{
+    res.render("electrician",  {message: ''});
+});
+app.post("/electrician", (req,res)=>{
+    booking(req,res);
+});
+app.get("/handyman",(req,res)=>{
+    res.render("handyman",  {message: ''});
+});
+app.post("/handyman", (req,res)=>{
+    booking(req,res);
+});
 app.get('/acDismounting', (req, res) => {
 
     
@@ -88,31 +133,9 @@ app.get('/acGeneral', (req, res) => {
     myFunction('ac-general')
 })
 
-app.post("/airCondition", (req,res)=>{
-    if(req.user === undefined){
-        console.log('You need to login first')
-        return res.render("login", {message: 'You need to login first'})
-    }else{
-        const date = req.body.date;
-        const time = req.body.time;
-        const service = req.body.service;
-        const price = req.body.price;
-        console.log(service, date, price, time)
-        User.updateOne({_id: req.user._id},   { 
-            $push: { 
-                bookedService:  { service, price, date, time}
-             } 
-           }).then(result => {
-            return  res.render("orderPlaced", {message: 'Your order has been placed successfully'});
-           }).catch(err=>{
-            console.log(err);
-            return  res.render("orderPlaced", {message: 'Please try again later. Order could not be placed'});
-           
-           })
-    }
-  
 
-});
+
+
 // To Get The Previou Service
 app.get("/getPreviouslyBookedService", (req, res)=>{
     User.findOne({ "_id": req.user._id })
