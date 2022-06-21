@@ -78,6 +78,54 @@ app.get("/userProfile",isLoggedIn ,(req,res) =>{
     // console.log("user: ", req.session.passport.user);
     // console.log("user: ", req.user._id);
 });
+app.get("/editProfile",isLoggedIn ,(req,res) =>{
+    res.render("editProfile", { info:req , message: ''});
+    console.log(req);
+    // console.log(loggedinUser);
+    // console.log("the user session " + req.sessionID);
+    // console.log("user: ", req.session.passport.user);
+    // console.log("user: ", req.user._id);
+});
+app.post("/editProfile",isLoggedIn,(req,res)=>{
+    let edFname, edLname, edUsername, edEmail, edAddress, edCity;
+    edFname=req.body.fname;
+    edLname=req.body.lname;
+    edUsername=req.body.username;
+    edEmail=req.body.email;
+    edAddress=req.body.address;
+    edCity=req.body.city;
+    // if(req.user === undefined){
+    //     console.log('You need to login first')
+    //     return res.render("login", {message: 'You need to login first'})
+    // }else{
+    // User.updateOne({_id: req.user._id},   { 
+    //     $push: { 
+            
+    //      } 
+    //    }).then(result => {
+    //     return  res.render("/userProfile", {message: 'Your order has been placed successfully'});
+    //    }).catch(err=>{
+    //     console.log(err);
+    //     // return  res.render("/userProfile", {message: 'Please try again later. Edit was not successful'});
+       
+    //    })
+    // console.log(edFname, edLname, edUsername, edEmail, edAddress, edCity);
+
+
+      User.updateOne({ "_id": req.user._id},{ "firstname": edFname, "lastname": edLname,"username": edUsername,
+        "email": edEmail,
+        "address": edAddress,
+        "city": edCity}).then((result) => {
+    console.log(result)
+    return res.status(200).render('profileSuccess')
+}).catch(err => {
+    console.log(err)
+    return res.status(500).render('userProfile', { info: req, message: 'Please Try Again. Profile Could Not Be Updated', updateService: [], bookedService: [] })
+});
+  
+    
+
+});
 app.get("/success",(req,res)=>{
     res.render("success");
 });
@@ -133,7 +181,9 @@ app.get('/acGeneral', (req, res) => {
     myFunction('ac-general')
 })
 
-
+app.get("/profileSuccess",(req,res)=>{
+    res.render("profileSuccess",  {message: ''});
+});
 
 
 // To Get The Previou Service
@@ -287,6 +337,7 @@ app.post("/updateOrder", (req, res)=>{
 
 //Auth Routes
 app.get("/login",(req,res)=>{
+    req.logout();
     res.render("login", {message:''});
     // console.log(req);
 });
@@ -352,7 +403,6 @@ function isLoggedIn(req,res,next) {
     if(req.isAuthenticated()){
         return next();
     }
-    loggedinUser="";
     res.redirect("/login");
 }
 
