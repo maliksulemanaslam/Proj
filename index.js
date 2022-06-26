@@ -218,6 +218,24 @@ app.get("/washing_machine",(req,res)=>{
 app.post("/washing_machine", (req,res)=>{
     booking(req,res);
 });
+app.get("/facial",(req,res)=>{
+    res.render("facial",  {message: ''});
+});
+app.post("/facial", (req,res)=>{
+    booking(req,res);
+});
+app.get("/hair",(req,res)=>{
+    res.render("hair",  {message: ''});
+});
+app.post("/hair", (req,res)=>{
+    booking(req,res);
+});
+app.get("/massage",(req,res)=>{
+    res.render("massage",  {message: ''});
+});
+app.post("/massage", (req,res)=>{
+    booking(req,res);
+});
 app.get('/acDismounting', (req, res) => {
 
     
