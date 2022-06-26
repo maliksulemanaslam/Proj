@@ -170,6 +170,54 @@ app.get("/handyman",(req,res)=>{
 app.post("/handyman", (req,res)=>{
     booking(req,res);
 });
+app.get("/carpenter",(req,res)=>{
+    res.render("carpenter",  {message: ''});
+});
+app.post("/carpenter", (req,res)=>{
+    booking(req,res);
+});
+app.get("/cleaning",(req,res)=>{
+    res.render("cleaning",  {message: ''});
+});
+app.post("/cleaning", (req,res)=>{
+    booking(req,res);
+});
+app.get("/painter",(req,res)=>{
+    res.render("painter",  {message: ''});
+});
+app.post("/painter", (req,res)=>{
+    booking(req,res);
+});
+app.get("/car",(req,res)=>{
+    res.render("car",  {message: ''});
+});
+app.post("/car", (req,res)=>{
+    booking(req,res);
+});
+app.get("/home_appliances",(req,res)=>{
+    res.render("home_appliances",  {message: ''});
+});
+app.post("/home_appliances", (req,res)=>{
+    booking(req,res);
+});
+app.get("/geyser",(req,res)=>{
+    res.render("geyser",  {message: ''});
+});
+app.post("/geyser", (req,res)=>{
+    booking(req,res);
+});
+app.get("/cctv",(req,res)=>{
+    res.render("cctv",  {message: ''});
+});
+app.post("/cctv", (req,res)=>{
+    booking(req,res);
+});
+app.get("/washing_machine",(req,res)=>{
+    res.render("washing_machine",  {message: ''});
+});
+app.post("/washing_machine", (req,res)=>{
+    booking(req,res);
+});
 app.get('/acDismounting', (req, res) => {
 
     
