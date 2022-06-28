@@ -236,6 +236,9 @@ app.get("/massage",(req,res)=>{
 app.post("/massage", (req,res)=>{
     booking(req,res);
 });
+app.get("/order",(req,res)=>{
+    res.render("order",  {message: ''});
+});
 app.get('/acDismounting', (req, res) => {
 
     

@@ -1,0 +1,90 @@
+<%- include('header'); -%>
+
+<body>
+    <div class="container">
+    <table class="table login-card">
+        <thead>
+          <tr>
+            <a href="" class="btn btn-primary">active order</a>
+            <a href=""> previous order</a>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Order date/time</td>
+            <td>12/07/2022 09:06PM</td>
+          </tr>
+          <tr>
+            <td>Order name</td>
+            <td>AC Service</td>
+          </tr>
+          <tr>
+            <td>Order status</td>
+            <td>Received</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ol class="list-group list-group-numbered login-card">
+        <h3 class="fw-bold">Order status</h3>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Order placed</div>
+            Request on 12/07/2022 09:06PM
+          </div>
+          <span class="badge bg-primary rounded-pill">✓</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Admin confirmation</div>
+          </div>
+          <span class="badge bg-dark rounded-pill">✓</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Vendor assigned</div>
+          </div>
+          <span class="badge bg-dark rounded-pill">✓</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">In Process</div>
+            </div>
+            <span class="badge bg-dark rounded-pill">✓</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Order finished</div>
+            </div>
+            <span class="badge bg-dark rounded-pill">✓</span>
+          </li>
+      </ol>
+    </div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Mark order as finished
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Give a review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+ 
+</body>
