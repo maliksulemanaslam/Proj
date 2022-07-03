@@ -1,0 +1,54 @@
+<%- include('header'); -%>
+
+<body>
+  <% order.forEach(function(order){%>
+    <div class="card-container container">  
+    <table class="table login-card">
+      <thead>
+        <tr>
+          <th scope="col">Order</th>
+          <th scope="col">Details</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>Name</td>
+          <td>
+            <%=order.service%>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+            <!-- <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button> -->
+          <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>
+            <%= order.date %>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Time</td>
+          <td>
+            <%= order.time %>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td><%= order.price%>     
+            <td></td> 
+        </tr>
+       
+      </tbody>
+     
+    </table>
+  </div>
+</div>
+  <%}) %>
+
+</body>

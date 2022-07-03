@@ -43,7 +43,12 @@ h3 {
   overflow-y: auto;
   overflow-x: hidden;
 }
-
+tbody, td, tfoot, th, thead, tr {
+  border-style: none;
+}
+.table{
+  padding: 100px!important;
+}
 .active:hover {
   opacity: 50%;
 }
@@ -93,7 +98,12 @@ h3 {
   margin: 5px;
   color: red;
 }
-
+.btn-profile{
+margin: 7px;
+}
+.payment-input{
+  width: 100%;
+}
 .middle-section-container-2 {
   margin-top: 8%;
   margin-bottom: 8%;
@@ -117,13 +127,20 @@ h3 {
   flex-direction: row;
 }
 
-
+.CardField-child{
+  transform: translateX(2px) !important;
+}
 .right-column {
   padding: 0;
   margin-left: 50%;
   width: 50%;
 }
-
+.payment-cont{
+  /* width: 350px; */
+  max-width: 30%;
+  margin: auto;
+  width: 50%;
+}
 .top-section-container-fluid {
   padding-top: 15%;
   padding-bottom: 15%;
