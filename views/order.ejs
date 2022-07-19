@@ -25,8 +25,13 @@
               </td>
             </tr>
             <tr>
+              <% if(status === 5){ %>
               <td>Order status</td>
-              <td>Received</td>
+              <td>Completed</td>
+              <% } else{%>
+                <td>Order status</td>
+                <td>Received</td>
+              <%}%>
             </tr>
           </tbody>
         </table>
@@ -90,15 +95,37 @@
           </li>
           <a href="/receipt?order=<%=service%>" class="btn btn-primary btn-profile">Click To Make Payment</a>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-outline-primary btn-profile" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">
+          <button type="button" class="btn btn-outline-primary btn-profile" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  onclick="CheckStatus()">
             Mark order as finished
           </button>
         </ol>
 
       </div>
     </div>
-
+<script>
+  function CheckStatus(){
+    const status = '<%=status%>';
+    const service = '<%=service%>'; 
+    const date = '<%=date%>';
+    const time = '<%=time%>'; 
+    const price = '<%=price%>'; 
+    if(parseInt(status) < 4 ){
+      alert('Order not yet in processing')
+    }else{
+      fetch(`/updateorderstatus?order=${service}&date=${date}&time=${time}&price=${price}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          }, redirect: "follow"
+        }).then(result => {
+          console.log(result);
+          if (result.ok) {
+            window.location.href = `/order?order=${service}`
+          }
+        }).catch(err => console.log(err))
+    }
+  }
+</script>
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -127,9 +154,7 @@
         </form>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"></script>
+</script>
 
   </body>
   <%- include('footer'); -%>

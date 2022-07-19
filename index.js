@@ -373,6 +373,25 @@ app.get('/order', (req, res) => {
         return res.render("order", { service: service, date: date, time: time, price: price, status: parseInt(status), info: req })
     }).catch(err => console.log(err))
 });
+//UPDATE ORDER STATUS
+app.get('/updateorderstatus', (req, res)=>{
+    const order = req.query.order;
+    const date = req.query.date;
+    const time = req.query.time;
+    const price = req.query.price;
+    User.updateOne({"_id": req.user._id, "bookedService.service": order}, 
+    {
+        '$set': {
+            'bookedService.$.service': order,
+            'bookedService.$.date': date,
+            'bookedService.$.time': time,
+            'bookedService.$.price': price,
+            'bookedService.$.status': 5,
+        }
+    }).then(result=>{
+        res.redirect(`/order?order=${order}`);
+    }).catch(err => console.log(err))
+})
 //Storing Reviews
 app.post('/review', (req, res) => {
     let newReview = new review({
