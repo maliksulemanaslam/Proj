@@ -4,11 +4,11 @@
   <main id="signup-main">
     <div class="container signup-container">
       <h4 class="login-h4">User Signup</h4>
-      <form autocomplete="off" class="row g-3 needs-validation" novalidate action="/signup" method="post">
+      <form autocomplete="off" class="row g-3 needs-validation" action="/signup" method="post" novalidate>
         <div><p><%= message %></p></div>
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label">First name</label>
-          <input type="text" class="form-control" id="validationCustom01" required name="firstname">
+          <input type="text" class="form-control" id="validationCustom01" name="firstname" required>
           <div class="valid-feedback">
             Looks good!
           </div>
@@ -108,4 +108,24 @@
     </div>
   </main>
 </body>
+<script>
+  (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 <%- include('footer'); -%>

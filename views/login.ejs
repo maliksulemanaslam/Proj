@@ -9,15 +9,27 @@
         </div>
         <p class="login-warning"><%= message %></p>
         <div class="card-body">
-          <form autocomplete="off" action="/login" method="POST">
+          <form class="needs-validation" autocomplete="off" action="/login" method="POST" novalidate>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"><h5>Username</h5></label>
-              <input type="text" class="form-control login-input" id="username" aria-describedby="emailHelp" name="username">
+              <label for="username" class="form-label"><h5>Username</h5></label>
+              <input type="text" class="form-control login-input" id="username" aria-describedby="emailHelp" name="username" required>
               <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please enter a valid username.
+              </div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label"><h5>Password</h5></label>
-              <input type="password" class="form-control login-input" id="password" name="password">
+              <label for="password" class="form-label"><h5>Password</h5></label>
+              <input type="password" class="form-control login-input" id="password" name="password" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please enter password.
+              </div>
             </div>
             <button type="submit" class="btn btn-outline-dark">Login</button>
           </form>
@@ -30,4 +42,24 @@
     </div>
   </main>
 </body>
+<script>
+  (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 <%- include('footer'); -%>

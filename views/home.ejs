@@ -223,20 +223,38 @@
             <p>Leave your complaint here to help us make our services better for you!</p>
           </div>
           <div autocomplete="off" class="col-lg-6 col-sm-12">
-            <form action="/home" method="post">
+            <form class="needs-validation" action="/home" method="post" novalidate>
               <!-- Name input -->
               <div class="form-outline mb-4">
-                <input type="text" id="form4Example1" class="form-control" placeholder="Name" name="name" />
+                <input type="text" id="form4Example1" class="form-control" placeholder="Name" name="name" required/>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter a name.
+                </div>
               </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form4Example2" class="form-control" placeholder="Email address" name="email" />
+                <input type="email" id="form4Example2" class="form-control" placeholder="Email address" name="email" required/>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter an email.
+                </div>
               </div>
 
               <!-- Message input -->
               <div class="form-outline mb-4">
-                <textarea class="form-control" id="form4Example3" rows="4" placeholder="Message" name="message"></textarea>
+                <textarea class="form-control" id="form4Example3" rows="4" placeholder="Message" name="message" required></textarea>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Please enter your complaint.
+                </div>
               </div>
 
               <!-- Checkbox -->
@@ -258,4 +276,24 @@
     </div>
   </section>
 </main>
+<script>
+  (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 <%- include('footer'); -%>
